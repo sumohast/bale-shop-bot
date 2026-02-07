@@ -3,7 +3,9 @@ const Product = require("../models/Product");
 const Category = require("../models/Category");
 const Cart = require("../models/Cart");
 const Order = require("../models/Order");
+const DiscountCode = require("../models/DiscountCode");
 const BotService = require("../services/BotService");
+const NotificationService = require("../services/NotificationService");
 const Helper = require("../utils/helper");
 const Validator = require("../utils/validator");
 const logger = require("../utils/logger");
@@ -38,6 +40,8 @@ class BotController {
       [{ text: "📊 آمار کلی" }],
       [{ text: "📋 مدیریت سفارش‌ها" }, { text: "👥 مدیریت کاربران" }],
       [{ text: "📦 مدیریت محصولات" }, { text: "➕ افزودن محصول" }],
+      [{ text: "🎁 مدیریت کدهای تخفیف" }, { text: "➕ ایجاد کد تخفیف" }],
+      [{ text: "📢 ارسال پیام همگانی" }],
       [{ text: "🔙 برگشت به منوی کاربر" }],
     ]);
   }
@@ -74,6 +78,26 @@ class BotController {
           this.clearUserState(chatId);
           return BotService.sendMessage(chatId, "منوی اصلی:", this.mainMenu());
         }
+
+        // مدیریت کدهای تخفیف
+        if (text === "🎁 مدیریت کدهای تخفیف") {
+          return this.showDiscountCodes(chatId);
+        }
+
+        // ایجاد کد تخفیف
+        if (text === "➕ ایجاد کد تخفیف") {
+          return this.startCreateDiscount(chatId);
+        }
+
+        // ارسال پیام همگانی
+        if (text === "📢 ارسال پیام همگانی") {
+          const state = this.getUserState(chatId);
+          state.step = "broadcast_message";
+          return BotService.sendMessage(
+            chatId,
+            "📢 *ارسال پیام همگانی*\n\nمتن پیام خود را برای ارسال به همه کاربران وارد کنید:"
+          );
+        }
       }
 
       // دستورات عمومی
@@ -91,19 +115,45 @@ class BotController {
       if (text === "📦 سفارش‌های من") return this.showUserOrders(chatId, user.id);
       
       if (text === "🔍 پیگیری سفارش") {
-        const state = this.getUserState(chatId);
-        state.step = "track_order";
-        return BotService.sendMessage(chatId, "لطفاً شماره سفارش رو ارسال کن:");
+        this.userStates.set(chatId, { step: "track_order" });
+        return BotService.sendMessage(
+          chatId,
+          "📦 لطفاً کد پیگیری سفارش خود را وارد کنید:\n(مثل TR-XXXXXXXXXX-XXXXXX)"
+        );
       }
 
       if (text === "ℹ️ درباره ما") return this.showAbout(chatId);
       if (text === "☎️ پشتیبانی") return this.showSupport(chatId);
 
-      // مدیریت state‌ها
       const state = this.getUserState(chatId);
-
       if (state.step === "track_order") {
-        return this.trackOrder(chatId, text);
+        const order = await Order.findByTrackingCode(text.trim().toUpperCase());
+        
+        if (!order) {
+          return BotService.sendMessage(chatId, "❌ کد پیگیری نامعتبر است. لطفاً دوباره امتحان کنید.");
+        }
+
+        const items = await Order.getItems(order.id);
+
+        let message = `📦 *سفارش #${order.id}*\n\n`;
+        message += `کد پیگیری: ${order.tracking_code}\n`;
+        message += `وضعیت: ${Helper.translateOrderStatus(order.status)}\n`;
+        message += `پرداخت: ${Helper.translatePaymentStatus(order.payment_status)}\n`;
+        message += `مبلغ نهایی: ${Helper.formatPrice(order.final_price)} تومان\n`;
+        message += `تاریخ: ${Helper.toJalali(order.created_at)}\n\n`;
+        message += `📋 اقلام سفارش:\n`;
+        items.forEach((item, index) => {
+          message += `${index + 1}. ${item.product_name} × ${item.quantity}\n`;
+          const itemPrice = item.discount_price || item.price;
+          message += `   قیمت: ${Helper.formatPrice(itemPrice * item.quantity)} تومان\n`;
+        });
+
+        if (order.customer_notes) {
+          message += `\n📝 یادداشت مشتری: ${order.customer_notes}`;
+        }
+
+        this.clearUserState(chatId); // پاک کردن state بعد از نمایش
+        return BotService.sendMessage(chatId, message, this.mainMenu());
       }
 
       if (state.step === "checkout_name") {
@@ -141,6 +191,70 @@ class BotController {
         }
         state.data.postal_code = postal;
         return this.completeCheckout(chatId, user.id, state.data);
+      }
+
+      // ورود کد تخفیف
+      if (state.step === "enter_discount") {
+        return this.applyDiscountCode(chatId, user.id, text);
+      }
+
+      // ارسال پیام همگانی (ادمین)
+      if (String(chatId) === String(config.bot.adminChatId)) {
+        if (state.step === "broadcast_message") {
+          return this.sendBroadcast(chatId, text);
+        }
+
+        // ایجاد کد تخفیف
+        if (state.step === "create_discount_code") {
+          state.data.code = Validator.sanitizeText(text).toUpperCase();
+          state.step = "create_discount_type";
+          return BotService.sendMessage(
+            chatId,
+            `کد: ${state.data.code}\n\nنوع تخفیف را انتخاب کنید:\n\n1. درصدی (percentage)\n2. ثابت (fixed)\n\nعدد 1 یا 2 را ارسال کنید:`
+          );
+        }
+
+        if (state.step === "create_discount_type") {
+          const type = text === "1" ? "percentage" : text === "2" ? "fixed" : null;
+          if (!type) {
+            return BotService.sendMessage(chatId, "❌ فقط عدد 1 یا 2:");
+          }
+          state.data.discount_type = type;
+          state.step = "create_discount_value";
+          return BotService.sendMessage(
+            chatId,
+            `نوع: ${type === "percentage" ? "درصدی" : "ثابت"}\n\nمقدار تخفیف:\n${type === "percentage" ? "(عدد بین 1 تا 100)" : "(مبلغ به تومان)"}`
+          );
+        }
+
+        if (state.step === "create_discount_value") {
+          const value = parseFloat(text);
+          if (!Validator.isValidPrice(value)) {
+            return BotService.sendMessage(chatId, "❌ مقدار نامعتبر:");
+          }
+          state.data.discount_value = value;
+          state.step = "create_discount_min";
+          return BotService.sendMessage(chatId, "حداقل خرید (به تومان):\n(یا 0 برای بدون محدودیت)");
+        }
+
+        if (state.step === "create_discount_min") {
+          const min = parseInt(text);
+          state.data.min_purchase = min <= 0 ? 0 : min;
+          state.step = "create_discount_limit";
+          return BotService.sendMessage(chatId, "تعداد استفاده مجاز:\n(یا 0 برای نامحدود)");
+        }
+
+        if (state.step === "create_discount_limit") {
+          const limit = parseInt(text);
+          state.data.usage_limit = limit <= 0 ? null : limit;
+          state.step = "create_discount_desc";
+          return BotService.sendMessage(chatId, "توضیحات کد تخفیف:\n(یا 0 برای رد کردن)");
+        }
+
+        if (state.step === "create_discount_desc") {
+          state.data.description = text === "0" ? null : Validator.sanitizeText(text);
+          return this.saveDiscountCode(chatId, state.data);
+        }
       }
 
       // افزودن محصول (ادمین)
@@ -295,6 +409,7 @@ class BotController {
 
       const buttons = [];
 
+      // دکمه‌های مدیریت هر محصول
       cartData.items.forEach((item) => {
         buttons.push([
           { text: `➖`, callback_data: `cart_dec_${item.product_id}` },
@@ -304,6 +419,8 @@ class BotController {
         ]);
       });
 
+      // دکمه کد تخفیف
+      buttons.push([{ text: "🎁 کد تخفیف دارید؟", callback_data: "apply_discount" }]);
       buttons.push([{ text: "🗑 پاک کردن سبد", callback_data: "cart_clear" }]);
       buttons.push([{ text: "✅ تکمیل خرید", callback_data: "checkout_start" }]);
 
@@ -342,60 +459,42 @@ class BotController {
         return BotService.sendMessage(chatId, "سبد خرید خالیست!");
       }
 
+      // دریافت اطلاعات تخفیف از state
+      const state = this.getUserState(chatId);
+      const discountCode = state.data.discount_code;
+      const discountAmount = state.data.discount_amount || 0;
+
+      // ایجاد سفارش با تخفیف
       const orderId = await Order.create(userId, {
         ...orderData,
         total_price: cartData.total,
+        discount_amount: discountAmount,
         items: cartData.items,
       });
 
       const order = await Order.findById(orderId);
+
+      // ثبت استفاده از کد تخفیف
+      if (discountCode) {
+        await DiscountCode.recordUsage(discountCode.id, userId, orderId);
+      }
+
       this.clearUserState(chatId);
 
-      let successMessage = `✅ سفارش ثبت شد!\n\n`;
-      successMessage += `🆔 شماره: ${order.id}\n`;
-      successMessage += `📍 کد پیگیری: ${order.tracking_code}\n`;
-      successMessage += `💰 مبلغ: ${Helper.formatPrice(order.final_price)} ${config.shop.currency}\n\n`;
-      successMessage += `سفارش در حال بررسی است.`;
+      // ارسال اعلان به کاربر
+      await NotificationService.orderCreated(order, cartData.items);
 
-      await BotService.sendMessage(chatId, successMessage, this.mainMenu());
-      await this.notifyAdminNewOrder(order, cartData.items);
+      // ارسال اعلان به ادمین
+      await NotificationService.newOrderToAdmin(order, cartData.items);
+
+      // پاک کردن سبد خرید
+      await Cart.clear(userId);
 
       return order;
     } catch (error) {
       logger.error(`خطا در completeCheckout: ${error.message}`);
       this.clearUserState(chatId);
       return BotService.sendMessage(chatId, `❌ خطا: ${error.message}`, this.mainMenu());
-    }
-  }
-
-  async notifyAdminNewOrder(order, items) {
-    try {
-      let message = `🔔 *سفارش جدید!*\n\n`;
-      message += `🆔 سفارش: ${order.id}\n`;
-      message += `📍 کد: ${order.tracking_code}\n`;
-      message += `👤 ${order.full_name}\n`;
-      message += `📱 ${order.phone}\n`;
-      message += `📍 ${order.address}\n`;
-      if (order.postal_code) message += `📮 ${order.postal_code}\n`;
-      message += `\n📦 *اقلام:*\n`;
-
-      items.forEach((item, index) => {
-        message += `${index + 1}. ${item.name} × ${item.quantity}\n`;
-      });
-
-      message += `\n💰 جمع: ${Helper.formatPrice(order.total_price)}\n`;
-      message += `💵 *نهایی: ${Helper.formatPrice(order.final_price)}*\n`;
-
-      const keyboard = Helper.createInlineKeyboard([
-        [
-          { text: "✅ تایید", callback_data: `order_confirm_${order.id}` },
-          { text: "❌ رد", callback_data: `order_cancel_${order.id}` },
-        ],
-      ]);
-
-      await BotService.sendMessage(config.bot.adminChatId, message, keyboard);
-    } catch (error) {
-      logger.error(`خطا در notifyAdminNewOrder: ${error.message}`);
     }
   }
 
@@ -469,6 +568,61 @@ class BotController {
   async showSupport(chatId) {
     const message = `☎️ *پشتیبانی*\n\n📱 @moha_st\n📧 sumohast@gmail.com`;
     return BotService.sendMessage(chatId, message, this.mainMenu());
+  }
+
+  // اعمال کد تخفیف
+  async applyDiscountCode(chatId, userId, code) {
+    try {
+      this.clearUserState(chatId);
+
+      const cartData = await Cart.getTotal(userId);
+
+      if (cartData.items.length === 0) {
+        return BotService.sendMessage(chatId, "سبد خرید خالیست!", this.mainMenu());
+      }
+
+      // اعتبارسنجی کد تخفیف
+      const result = await DiscountCode.validate(code, userId, cartData.total);
+
+      if (!result.valid) {
+        await BotService.sendMessage(chatId, result.message);
+        return this.showCart(chatId, userId);
+      }
+
+      // ذخیره کد تخفیف در state کاربر
+      const state = this.getUserState(chatId);
+      state.data.discount_code = result.discount;
+      state.data.discount_amount = result.discountAmount;
+
+      // نمایش سبد با تخفیف
+      const afterDiscount = cartData.total - result.discountAmount;
+      const tax = Helper.calculateTax(afterDiscount);
+      const finalPrice = afterDiscount + tax;
+
+      let message = `✅ ${result.message}\n\n`;
+      message += `🛒 *سبد خرید با تخفیف:*\n\n`;
+
+      cartData.items.forEach((item, index) => {
+        const price = item.discount_price || item.price;
+        message += `${index + 1}. ${item.name} × ${item.quantity}\n`;
+      });
+
+      message += `\n💰 جمع: ${Helper.formatPrice(cartData.total)} تومان\n`;
+      message += `🎁 تخفیف: ${Helper.formatPrice(result.discountAmount)} تومان\n`;
+      message += `📊 مالیات: ${Helper.formatPrice(tax)} تومان\n`;
+      message += `💵 *مبلغ نهایی: ${Helper.formatPrice(finalPrice)} تومان*\n`;
+
+      const keyboard = Helper.createInlineKeyboard([
+        [{ text: "🗑 حذف کد تخفیف", callback_data: "remove_discount" }],
+        [{ text: "✅ تکمیل خرید", callback_data: "checkout_start" }],
+        [{ text: "🔙 بازگشت به سبد", callback_data: "back_to_cart" }],
+      ]);
+
+      return BotService.sendMessage(chatId, message, keyboard);
+    } catch (error) {
+      logger.error(`خطا در applyDiscountCode: ${error.message}`);
+      return BotService.sendMessage(chatId, "❌ خطا در اعمال کد تخفیف");
+    }
   }
 
   async showStats(chatId) {
@@ -617,6 +771,153 @@ class BotController {
     }
   }
 
+  // نمایش کدهای تخفیف (ادمین)
+  async showDiscountCodes(chatId) {
+    try {
+      const codes = await DiscountCode.getActive();
+
+      if (codes.length === 0) {
+        return BotService.sendMessage(chatId, "هیچ کد تخفیفی موجود نیست.", this.adminMenu());
+      }
+
+      let message = `🎁 *کدهای تخفیف فعال:*\n\n`;
+
+      codes.forEach((code, index) => {
+        message += `${index + 1}. کد: *${code.code}*\n`;
+        if (code.discount_type === "percentage") {
+          message += `   💰 ${code.discount_value}٪ تخفیف\n`;
+        } else {
+          message += `   💰 ${Helper.formatPrice(code.discount_value)} تومان\n`;
+        }
+        message += `   📊 استفاده: ${code.used_count}`;
+        if (code.usage_limit) {
+          message += ` / ${code.usage_limit}`;
+        }
+        message += `\n\n`;
+      });
+
+      const buttons = codes.slice(0, 10).map((code) => [
+        { text: `🗑 حذف ${code.code}`, callback_data: `delete_discount_${code.id}` },
+      ]);
+
+      return BotService.sendMessage(chatId, message, Helper.createInlineKeyboard(buttons));
+    } catch (error) {
+      logger.error(`خطا در showDiscountCodes: ${error.message}`);
+      throw error;
+    }
+  }
+
+  // شروع ایجاد کد تخفیف
+  async startCreateDiscount(chatId) {
+    const state = this.getUserState(chatId);
+    state.step = "create_discount_code";
+    state.data = {};
+    return BotService.sendMessage(chatId, "➕ *ایجاد کد تخفیف*\n\nکد تخفیف را وارد کنید:\n(فقط حروف انگلیسی و اعداد)");
+  }
+
+  // ذخیره کد تخفیف
+  async saveDiscountCode(chatId, data) {
+    try {
+      const id = await DiscountCode.create(data);
+      this.clearUserState(chatId);
+
+      let message = `✅ کد تخفیف ایجاد شد!\n\n`;
+      message += `🎁 کد: ${data.code}\n`;
+      message += `💰 ${data.discount_type === "percentage" ? data.discount_value + "٪" : Helper.formatPrice(data.discount_value) + " تومان"}\n`;
+      if (data.min_purchase > 0) {
+        message += `📊 حداقل خرید: ${Helper.formatPrice(data.min_purchase)}\n`;
+      }
+
+      await BotService.sendMessage(chatId, message, this.adminMenu());
+
+      // اعلان به همه کاربران (اختیاری)
+      const keyboard = Helper.createInlineKeyboard([
+        [
+          { text: "✅ بله", callback_data: `announce_discount_${id}` },
+          { text: "❌ خیر", callback_data: "noop" },
+        ],
+      ]);
+
+      return BotService.sendMessage(
+        chatId,
+        "آیا می‌خواهید این کد را به همه کاربران اعلام کنید؟",
+        keyboard
+      );
+    } catch (error) {
+      logger.error(`خطا در saveDiscountCode: ${error.message}`);
+      this.clearUserState(chatId);
+      return BotService.sendMessage(chatId, `❌ خطا: ${error.message}`);
+    }
+  }
+
+  // ارسال پیام همگانی
+  async sendBroadcast(chatId, message) {
+    try {
+      this.clearUserState(chatId);
+
+      const users = await User.getAll(10000);
+
+      await BotService.sendMessage(chatId, `📢 در حال ارسال به ${users.length} کاربر...`);
+
+      let successCount = 0;
+      let failCount = 0;
+
+      for (const user of users) {
+        try {
+          await BotService.sendMessage(user.chat_id, message);
+          successCount++;
+          await Helper.sleep(100); // جلوگیری از flood
+        } catch (error) {
+          failCount++;
+          logger.warn(`خطا در ارسال به ${user.chat_id}: ${error.message}`);
+        }
+      }
+
+      return BotService.sendMessage(
+        chatId,
+        `✅ ارسال کامل شد!\n\n✅ موفق: ${successCount}\n❌ ناموفق: ${failCount}`,
+        this.adminMenu()
+      );
+    } catch (error) {
+      logger.error(`خطا در sendBroadcast: ${error.message}`);
+      return BotService.sendMessage(chatId, "❌ خطا در ارسال پیام همگانی");
+    }
+  }
+
+  // نمایش محصولات پیشرفته (با دکمه حذف)
+  async showProductsListAdvanced(chatId) {
+    try {
+      const products = await Product.getAll();
+      const limited = products.slice(0, 15);
+
+      let message = `📦 *محصولات (${products.length})*\n\n`;
+
+      limited.forEach((product, index) => {
+        const status = product.is_active ? "🟢" : "🔴";
+        message += `${index + 1}. ${status} ${product.name}\n`;
+        message += `   💰 ${Helper.formatPrice(product.price)} | 📦 ${product.stock}\n`;
+      });
+
+      const buttons = limited.map((product) => [
+        { 
+          text: `${product.is_active ? "❌ غیرفعال" : "✅ فعال"} ${product.name.substring(0, 20)}`, 
+          callback_data: product.is_active ? `deactivate_product_${product.id}` : `activate_product_${product.id}` 
+        },
+        { 
+          text: `🗑 حذف کامل`, 
+          callback_data: `delete_product_${product.id}` 
+        },
+      ]);
+
+      buttons.push([{ text: "🔙 بازگشت", callback_data: "admin_back" }]);
+
+      return BotService.sendMessage(chatId, message, Helper.createInlineKeyboard(buttons));
+    } catch (error) {
+      logger.error(`خطا در showProductsListAdvanced: ${error.message}`);
+      throw error;
+    }
+  }
+
   async handleCallback(callbackQuery) {
     try {
       const chatId = callbackQuery.from.id;
@@ -690,6 +991,33 @@ class BotController {
         return this.startCheckout(chatId, user.id);
       }
 
+      // درخواست کد تخفیف
+      if (callbackData === "apply_discount") {
+        const state = this.getUserState(chatId);
+        state.step = "enter_discount";
+        await BotService.answerCallbackQuery(callbackQuery.id, "");
+        return BotService.sendMessage(chatId, "🎁 کد تخفیف خود را وارد کنید:");
+      }
+
+      // حذف کد تخفیف
+      if (callbackData === "remove_discount") {
+        const state = this.getUserState(chatId);
+        state.data.discount_code = null;
+        state.data.discount_amount = 0;
+        await BotService.answerCallbackQuery(callbackQuery.id, "🗑 کد تخفیف حذف شد");
+        await BotService.deleteMessage(chatId, messageId);
+        return this.showCart(chatId, user.id);
+      }
+
+      // بازگشت به سبد
+      if (callbackData === "back_to_cart") {
+        const state = this.getUserState(chatId);
+        state.data.discount_code = null;
+        state.data.discount_amount = 0;
+        await BotService.deleteMessage(chatId, messageId);
+        return this.showCart(chatId, user.id);
+      }
+
       // مشاهده سفارش
       if (callbackData.startsWith("order_view_")) {
         const orderId = parseInt(callbackData.split("_")[2]);
@@ -714,34 +1042,48 @@ class BotController {
         await Order.updateStatus(orderId, "confirmed");
         await BotService.answerCallbackQuery(callbackQuery.id, "✅ تایید شد");
         
-        // دریافت اطلاعات سفارش و کاربر
         const order = await Order.findById(orderId);
-        const orderUser = await User.findById(order.user_id);
-        
-        if (orderUser) {
-          await BotService.sendMessage(
-            orderUser.chat_id,
-            `✅ سفارش #${orderId} شما تایید شد و در حال آماده‌سازی است.`
-          );
-        }
+        await NotificationService.orderConfirmed(order);
         return;
       }
 
       if (callbackData.startsWith("order_cancel_")) {
         const orderId = parseInt(callbackData.split("_")[2]);
-        await Order.cancel(orderId, "لغو ادمین");
+        await Order.cancel(orderId, "لغو توسط ادمین");
         await BotService.answerCallbackQuery(callbackQuery.id, "❌ لغو شد");
         
-        // دریافت اطلاعات سفارش و کاربر
         const order = await Order.findById(orderId);
-        const orderUser = await User.findById(order.user_id);
+        await NotificationService.orderCancelled(order, "لغو توسط ادمین");
+        return;
+      }
+
+      if (callbackData.startsWith("order_prepare_")) {
+        const orderId = parseInt(callbackData.split("_")[2]);
+        await Order.updateStatus(orderId, "preparing");
+        await BotService.answerCallbackQuery(callbackQuery.id, "📦 در حال آماده‌سازی");
         
-        if (orderUser) {
-          await BotService.sendMessage(
-            orderUser.chat_id,
-            `❌ متاسفانه سفارش #${orderId} شما لغو شد.`
-          );
-        }
+        const order = await Order.findById(orderId);
+        await NotificationService.orderPreparing(order);
+        return;
+      }
+
+      if (callbackData.startsWith("order_ship_")) {
+        const orderId = parseInt(callbackData.split("_")[2]);
+        await Order.updateStatus(orderId, "shipped");
+        await BotService.answerCallbackQuery(callbackQuery.id, "🚚 ارسال شد");
+        
+        const order = await Order.findById(orderId);
+        await NotificationService.orderShipped(order);
+        return;
+      }
+
+      if (callbackData.startsWith("order_deliver_")) {
+        const orderId = parseInt(callbackData.split("_")[2]);
+        await Order.updateStatus(orderId, "delivered");
+        await BotService.answerCallbackQuery(callbackQuery.id, "✅ تحویل داده شد");
+        
+        const order = await Order.findById(orderId);
+        await NotificationService.orderDelivered(order);
         return;
       }
 
@@ -754,9 +1096,10 @@ class BotController {
         message += `👤 ${order.full_name}\n`;
         message += `📱 ${order.phone}\n`;
         message += `📍 ${order.address}\n`;
-        message += `📌 ${Helper.translateOrderStatus(order.status)}\n`;
-        message += `💰 ${Helper.formatPrice(order.final_price)}\n\n`;
-        message += `اقلام:\n`;
+        if (order.postal_code) message += `📮 ${order.postal_code}\n`;
+        message += `📌 وضعیت: ${Helper.translateOrderStatus(order.status)}\n`;
+        message += `💰 ${Helper.formatPrice(order.final_price)} تومان\n\n`;
+        message += `📦 اقلام:\n`;
         items.forEach((item) => {
           message += `• ${item.product_name} × ${item.quantity}\n`;
         });
@@ -765,6 +1108,13 @@ class BotController {
           [
             { text: "✅ تایید", callback_data: `order_confirm_${order.id}` },
             { text: "❌ لغو", callback_data: `order_cancel_${order.id}` },
+          ],
+          [
+            { text: "📦 آماده‌سازی", callback_data: `order_prepare_${order.id}` },
+            { text: "🚚 ارسال شد", callback_data: `order_ship_${order.id}` },
+          ],
+          [
+            { text: "✅ تحویل داده شد", callback_data: `order_deliver_${order.id}` },
           ],
         ]);
 
@@ -775,6 +1125,102 @@ class BotController {
       if (callbackData === "noop") {
         await BotService.answerCallbackQuery(callbackQuery.id, "");
         return;
+      }
+
+      // حذف/فعال‌سازی محصول (ادمین)
+      if (callbackData.startsWith("deactivate_product_")) {
+        const productId = parseInt(callbackData.split("_")[2]);
+        await Product.update(productId, { is_active: false });
+        await BotService.answerCallbackQuery(callbackQuery.id, "❌ محصول غیرفعال شد");
+        await BotService.deleteMessage(chatId, messageId);
+        return this.showProductsListAdvanced(chatId);
+      }
+
+      if (callbackData.startsWith("activate_product_")) {
+        const productId = parseInt(callbackData.split("_")[2]);
+        await Product.update(productId, { is_active: true });
+        await BotService.answerCallbackQuery(callbackQuery.id, "✅ محصول فعال شد");
+        await BotService.deleteMessage(chatId, messageId);
+        return this.showProductsListAdvanced(chatId);
+      }
+
+      // حذف کامل محصول با تایید
+      if (callbackData.startsWith("delete_product_")) {
+        const productId = parseInt(callbackData.split("_")[2]);
+        const product = await Product.findById(productId);
+
+        const keyboard = Helper.createInlineKeyboard([
+          [
+            { text: "✅ بله، حذف شود", callback_data: `confirm_delete_product_${productId}` },
+            { text: "❌ خیر", callback_data: "cancel_delete" },
+          ],
+        ]);
+
+        await BotService.answerCallbackQuery(callbackQuery.id, "");
+        await BotService.deleteMessage(chatId, messageId);
+        
+        return BotService.sendMessage(
+          chatId,
+          `⚠️ *هشدار!*\n\nآیا مطمئن هستید که می‌خواهید محصول "${product.name}" را *کاملاً حذف* کنید؟\n\n⚠️ این عملیات غیرقابل بازگشت است!\n\n💡 توصیه: بهتر است محصول را غیرفعال کنید تا داده‌های سفارشات قبلی حفظ شود.`,
+          keyboard
+        );
+      }
+
+      // تایید حذف محصول
+      if (callbackData.startsWith("confirm_delete_product_")) {
+        const productId = parseInt(callbackData.split("_")[3]);
+        const product = await Product.findById(productId);
+        
+        await Product.hardDelete(productId);
+        await BotService.answerCallbackQuery(callbackQuery.id, "🗑 محصول حذف شد");
+        await BotService.deleteMessage(chatId, messageId);
+        
+        await BotService.sendMessage(
+          chatId,
+          `✅ محصول "${product.name}" به طور کامل حذف شد.`,
+          this.adminMenu()
+        );
+        
+        return this.showProductsListAdvanced(chatId);
+      }
+
+      // لغو حذف
+      if (callbackData === "cancel_delete") {
+        await BotService.answerCallbackQuery(callbackQuery.id, "❌ لغو شد");
+        await BotService.deleteMessage(chatId, messageId);
+        return this.showProductsListAdvanced(chatId);
+      }
+
+      // حذف کد تخفیف (ادمین)
+      if (callbackData.startsWith("delete_discount_")) {
+        const discountId = parseInt(callbackData.split("_")[2]);
+        await DiscountCode.deactivate(discountId);
+        await BotService.answerCallbackQuery(callbackQuery.id, "🗑 کد تخفیف حذف شد");
+        await BotService.deleteMessage(chatId, messageId);
+        return this.showDiscountCodes(chatId);
+      }
+
+      // اعلان کد تخفیف جدید
+      if (callbackData.startsWith("announce_discount_")) {
+        const discountId = parseInt(callbackData.split("_")[2]);
+        const discount = await DiscountCode.findById(discountId);
+        
+        await BotService.answerCallbackQuery(callbackQuery.id, "📢 در حال ارسال...");
+        await BotService.deleteMessage(chatId, messageId);
+        
+        await NotificationService.newDiscountCode(discount);
+        
+        return BotService.sendMessage(
+          chatId,
+          "✅ کد تخفیف به همه کاربران اعلام شد!",
+          this.adminMenu()
+        );
+      }
+
+      // بازگشت به پنل ادمین
+      if (callbackData === "admin_back") {
+        await BotService.deleteMessage(chatId, messageId);
+        return BotService.sendMessage(chatId, "پنل مدیریت:", this.adminMenu());
       }
 
     } catch (error) {

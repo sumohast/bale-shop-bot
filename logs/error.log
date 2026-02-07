@@ -25,3 +25,665 @@
 2026-02-07 16:03:01 [error]: خطا در sendPhoto: Request failed with status code 400
 2026-02-07 16:08:10 [error]: خطا در sendPhoto: Request failed with status code 400
 2026-02-07 16:08:14 [error]: خطا در sendPhoto: Request failed with status code 400
+2026-02-07 21:33:39 [error]: خطا در sendPhoto: Request failed with status code 400
+2026-02-07 21:33:40 [error]: خطا در sendPhoto: Request failed with status code 400
+2026-02-07 21:33:50 [error]: خطا در sendPhoto: Request failed with status code 400
+2026-02-07 21:33:52 [error]: خطا در answerCallbackQuery: Request failed with status code 400
+2026-02-07 21:33:52 [error]: خطا در handleCallback: Request failed with status code 400
+2026-02-07 21:33:52 [error]: خطا در answerCallbackQuery: Request failed with status code 400
+2026-02-07 21:33:52 [error]: Unhandled Rejection at: [object Promise], reason: AxiosError: Request failed with status code 400
+2026-02-07 21:49:32 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:32 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:49:33 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-07 21:52:35 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-07 22:21:46 [error]: خطا در getUpdates: connect EHOSTUNREACH 2.189.68.126:443
+2026-02-07 22:22:16 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-07 22:24:53 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-07 22:30:02 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-07 22:34:22 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-07 22:51:10 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-07 22:54:33 [error]: خطا در sendPhoto: Request failed with status code 400
+2026-02-07 22:54:34 [error]: خطا در sendPhoto: Request failed with status code 400
+2026-02-07 22:54:44 [error]: خطا در sendPhoto: Request failed with status code 400
+2026-02-07 23:31:24 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-07 23:34:26 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-07 23:37:27 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-07 23:37:57 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-07 23:38:27 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-07 23:38:57 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-07 23:39:28 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-07 23:39:58 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-07 23:40:28 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-07 23:40:58 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-07 23:41:28 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-07 23:41:58 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-07 23:42:28 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-07 23:42:58 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-07 23:43:28 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-07 23:43:58 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-07 23:44:28 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-07 23:44:58 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-07 23:45:28 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-07 23:45:58 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-07 23:46:28 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-07 23:46:58 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-07 23:47:28 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-07 23:47:58 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-07 23:48:28 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-07 23:48:58 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-07 23:49:28 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-07 23:49:58 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-07 23:50:28 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-07 23:50:58 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-07 23:51:28 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-07 23:51:58 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-07 23:55:55 [error]: خطا در sendPhoto: Request failed with status code 400
+2026-02-07 23:55:56 [error]: خطا در sendPhoto: Request failed with status code 400
+2026-02-07 23:56:27 [error]: خطا در answerCallbackQuery: Request failed with status code 400
+2026-02-07 23:56:27 [error]: خطا در handleCallback: Request failed with status code 400
+2026-02-07 23:56:27 [error]: خطا در answerCallbackQuery: Request failed with status code 400
+2026-02-07 23:56:27 [error]: Unhandled Rejection at: [object Promise], reason: AxiosError: Request failed with status code 400
+2026-02-07 23:57:55 [error]: خطا در sendPhoto: Request failed with status code 400
+2026-02-08 00:03:28 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-08 00:03:48 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-08 00:04:08 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-08 00:04:28 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-08 00:04:48 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-08 00:05:08 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-08 00:05:28 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-08 00:05:48 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-08 00:06:18 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-08 00:10:52 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-08 00:12:21 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-08 00:13:07 [error]: خطا در sendPhoto: Request failed with status code 400
+2026-02-08 00:13:08 [error]: خطا در sendPhoto: Request failed with status code 400
+2026-02-08 00:19:09 [error]: خطا در sendPhoto: Request failed with status code 400
+2026-02-08 00:21:40 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-08 00:30:32 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-08 00:30:49 [error]: خطا در sendPhoto: Request failed with status code 400
+2026-02-08 00:30:58 [error]: خطا در sendPhoto: Request failed with status code 400
+2026-02-08 00:30:58 [error]: خطا در sendPhoto: Request failed with status code 400
+2026-02-08 00:35:02 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-08 00:48:12 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-08 00:52:24 [error]: خطا در sendPhoto: Request failed with status code 400
+2026-02-08 00:52:25 [error]: خطا در sendPhoto: Request failed with status code 400
+2026-02-08 01:08:28 [error]: خطا در sendPhoto: Request failed with status code 400
+2026-02-08 01:08:29 [error]: خطا در sendPhoto: Request failed with status code 400
+2026-02-08 01:08:39 [error]: خطا در sendPhoto: Request failed with status code 400
+2026-02-08 01:08:41 [error]: خطا در answerCallbackQuery: Request failed with status code 400
+2026-02-08 01:08:41 [error]: خطا در handleCallback: Request failed with status code 400
+2026-02-08 01:08:41 [error]: خطا در answerCallbackQuery: Request failed with status code 400
+2026-02-08 01:08:41 [error]: Unhandled Rejection at: [object Promise], reason: AxiosError: Request failed with status code 400
+2026-02-08 01:09:58 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-08 01:13:42 [error]: خطا در handleMessage: Cannot access 'message' before initialization
+2026-02-08 01:13:49 [error]: خطا در handleMessage: Cannot access 'message' before initialization
+2026-02-08 01:13:51 [error]: خطا در handleMessage: Cannot access 'message' before initialization
+2026-02-08 01:14:47 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-08 01:20:11 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-08 01:20:41 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-08 01:21:11 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-08 01:29:45 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-08 01:31:34 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-08 01:32:01 [error]: خطا در getUpdates: connect EHOSTUNREACH 2.189.68.126:443
+2026-02-08 01:32:16 [error]: خطا در getUpdates: connect EHOSTUNREACH 2.189.68.126:443
+2026-02-08 01:32:46 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-08 01:34:06 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-08 01:38:27 [error]: خطا در getUpdates: timeout of 30000ms exceeded

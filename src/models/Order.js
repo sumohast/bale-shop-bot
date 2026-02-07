@@ -251,6 +251,46 @@ class Order {
       throw error;
     }
   }
+  static async findByTrackingCode(trackingCode) {
+    try {
+      const [rows] = await db.query(
+        "SELECT * FROM orders WHERE tracking_code = ?",
+        [trackingCode]
+      );
+      return rows.length > 0 ? rows[0] : null;
+    } catch (error) {
+      logger.error(`خطا در findByTrackingCode: ${error.message}`);
+      throw error;
+    }
+  }
+
+  static async getItems(orderId) {
+    try {
+      const [rows] = await db.query(
+        "SELECT * FROM order_items WHERE order_id = ?",
+        [orderId]
+      );
+      return rows;
+    } catch (error) {
+      logger.error(`خطا در getItems: ${error.message}`);
+      throw error;
+    }
+  }
+  static async getDiscountCode(orderId) {
+    try {
+      const [rows] = await db.query(`
+        SELECT dc.code 
+        FROM discount_usage du
+        JOIN discount_codes dc ON du.discount_code_id = dc.id
+        WHERE du.order_id = ?
+        LIMIT 1
+      `, [orderId]);
+      return rows.length > 0 ? rows[0].code : null;
+    } catch (error) {
+      logger.error(`خطا در getDiscountCode: ${error.message}`);
+      return null;
+    }
+  }
 }
 
 module.exports = Order;
