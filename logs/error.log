@@ -1,0 +1,38 @@
+2026-02-06 23:54:07 [error]: خطا در sendPhoto: Request failed with status code 400
+2026-02-06 23:54:08 [error]: خطا در sendPhoto: Request failed with status code 400
+2026-02-06 23:54:18 [error]: خطا در sendPhoto: Request failed with status code 400
+2026-02-07 00:10:00 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-07 00:21:41 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-07 00:23:05 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-07 00:38:12 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-07 00:38:43 [error]: خطا در sendMessage: Request failed with status code 403
+2026-02-07 00:38:43 [error]: خطا در handleCallback: Request failed with status code 403
+2026-02-07 00:38:43 [error]: خطا در answerCallbackQuery: Request failed with status code 400
+2026-02-07 00:38:43 [error]: Unhandled Rejection at: [object Promise], reason: AxiosError: Request failed with status code 400
+2026-02-07 00:38:49 [error]: خطا در sendMessage: Request failed with status code 403
+2026-02-07 00:38:49 [error]: خطا در handleCallback: Request failed with status code 403
+2026-02-07 00:38:49 [error]: خطا در answerCallbackQuery: Request failed with status code 400
+2026-02-07 00:38:49 [error]: Unhandled Rejection at: [object Promise], reason: AxiosError: Request failed with status code 400
+2026-02-07 00:40:36 [error]: خطا در sendPhoto: Request failed with status code 400
+2026-02-07 00:40:43 [error]: خطا در sendPhoto: Request failed with status code 400
+2026-02-07 00:40:44 [error]: خطا در sendPhoto: Request failed with status code 400
+2026-02-07 00:43:08 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-07 00:45:43 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-07 00:54:09 [error]: خطا در sendPhoto: Request failed with status code 400
+2026-02-07 00:54:09 [error]: خطا در sendPhoto: Request failed with status code 400
+2026-02-07 00:56:59 [error]: خطا در sendMessage: Request failed with status code 404
+2026-02-07 00:56:59 [error]: خطا در handleCallback: Request failed with status code 404
+2026-02-07 00:56:59 [error]: خطا در answerCallbackQuery: Request failed with status code 400
+2026-02-07 00:56:59 [error]: Unhandled Rejection at: [object Promise], reason: AxiosError: Request failed with status code 400
+2026-02-07 00:59:39 [error]: خطا در sendMessage: Request failed with status code 404
+2026-02-07 00:59:39 [error]: خطا در handleCallback: Request failed with status code 404
+2026-02-07 00:59:40 [error]: خطا در answerCallbackQuery: Request failed with status code 400
+2026-02-07 00:59:40 [error]: Unhandled Rejection at: [object Promise], reason: AxiosError: Request failed with status code 400
+2026-02-07 01:06:01 [error]: خطا در sendPhoto: Request failed with status code 400
+2026-02-07 01:06:03 [error]: خطا در sendPhoto: Request failed with status code 400
+2026-02-07 01:06:04 [error]: خطا در sendPhoto: Request failed with status code 400
+2026-02-07 09:20:28 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-07 09:33:15 [error]: خطا در پردازش آپدیت: data is not defined
+2026-02-07 09:33:21 [error]: خطا در پردازش آپدیت: data is not defined
+2026-02-07 09:33:32 [error]: خطا در پردازش آپدیت: data is not defined
+2026-02-07 09:33:46 [error]: خطا در پردازش آپدیت: data is not defined
