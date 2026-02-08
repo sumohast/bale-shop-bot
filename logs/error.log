@@ -725,3 +725,8 @@
 2026-02-08 17:12:53 [error]: خطا در getUpdates: timeout of 30000ms exceeded
 2026-02-08 17:25:52 [error]: خطا در getUpdates: timeout of 30000ms exceeded
 2026-02-08 17:26:05 [error]: خطا در showProductsList: array.slice is not a function
+2026-02-08 21:01:22 [error]: خطا در sendPhoto: Request failed with status code 400
+2026-02-08 21:04:07 [error]: خطا در sendPhoto: Request failed with status code 400
+2026-02-08 21:04:43 [error]: خطا در completeCheckout: message is not defined
+2026-02-08 21:06:04 [error]: خطا در completeCheckout: message is not defined
+2026-02-08 21:07:54 [error]: خطا در sendPhoto: Request failed with status code 400

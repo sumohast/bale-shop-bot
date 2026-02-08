@@ -592,6 +592,7 @@ class BotController {
       // ارسال رسید به کاربر
       let receipt = `✅ *سفارش شما ثبت شد!*\n\n`;
       receipt += `🆔 شماره سفارش: ${order.id}\n`;
+      receipt +="این کد را نزد خود نگه دارید:\n";
       receipt += `📍 کد پیگیری: ${order.tracking_code}\n`;
       receipt += `📅 تاریخ: ${Helper.toJalali(order.created_at)}\n\n`;
       
@@ -1549,6 +1550,7 @@ class BotController {
       const items = await Order.getItems(orderId);
 
       let message = `📦 *سفارش ${order.id}*\n\n`;
+      
       message += `📍 ${order.tracking_code}\n`;
       message += `📌 ${Helper.translateOrderStatus(order.status)}\n`;
       message += `💰 ${Helper.formatPrice(order.final_price)}\n\n`;
@@ -1619,6 +1621,7 @@ class BotController {
     const items = await Order.getItems(orderId);
 
     let message = `📦 *سفارش #${order.id}*\n\n`;
+    message += `📍 ${order.tracking_code}\n`;
     message += `👤 ${order.full_name}\n`;
     message += `📱 ${order.phone}\n`;
     message += `📍 ${order.address}\n`;
