@@ -10,6 +10,7 @@ const Helper = require("../utils/helper");
 const Validator = require("../utils/validator");
 const logger = require("../utils/logger");
 const config = require("../config/config");
+const Payment = require("../models/Payment");
 
 class BotController {
   constructor() {
@@ -44,6 +45,7 @@ class BotController {
       [{ text: "📦 مدیریت محصولات" }, { text: "➕ افزودن محصول" }],
       [{ text: "📂 مدیریت دسته‌بندی‌ها" }, { text: "➕ افزودن دسته‌بندی" }],
       [{ text: "🎁 مدیریت کدهای تخفیف" }, { text: "➕ ایجاد کد تخفیف" }],
+      [{ text: "🧾 فیش‌های در انتظار" }],
       [{ text: "📢 ارسال پیام همگانی" }],
       [{ text: "🔙 برگشت به منوی کاربر" }],
     ]);
@@ -54,6 +56,7 @@ class BotController {
     try {
       const chatId = message.from.id;
       const text = message.text;
+      const photo = message.photo;
       const userInfo = Helper.getUserInfo(message);
       
       const user = await User.getOrCreate(chatId, userInfo);
@@ -66,6 +69,18 @@ class BotController {
       }
 
       const isAdmin = String(chatId) === String(config.bot.adminChatId);
+
+      // بررسی آپلود فیش واریزی
+      if (photo) {
+        const state = this.getUserState(chatId);
+        if (state.step === "upload_receipt") {
+          const fileId = photo[photo.length - 1].file_id;
+          const orderId = state.data.order_id;
+          
+          this.clearUserState(chatId);
+          return this.handleReceiptUpload(chatId, orderId, fileId, user.id);
+        }
+      }
 
       // ==================== Admin Commands ====================
       if (isAdmin) {
@@ -83,6 +98,7 @@ class BotController {
         if (text === "➕ افزودن دسته‌بندی") return this.startAddCategory(chatId);
         if (text === "🎁 مدیریت کدهای تخفیف") return this.showDiscountCodes(chatId);
         if (text === "➕ ایجاد کد تخفیف") return this.startCreateDiscount(chatId);
+        if (text === "🧾 فیش‌های در انتظار") return this.showPendingReceipts(chatId);
         
         if (text === "📢 ارسال پیام همگانی") {
           const state = this.getUserState(chatId);
@@ -623,7 +639,10 @@ class BotController {
       await NotificationService.newOrderToAdmin(order, cartData.items);
       await Cart.clear(userId);
 
-      return order;
+      // نمایش اطلاعات حساب بانکی و درخواست فیش
+      await Helper.sleep(1000);
+      return this.showBankInfo(chatId, orderId, userId);
+      //return order; HW0
     } catch (error) {
       logger.error(`خطا در completeCheckout: ${error.message}`);
       this.clearUserState(chatId);
@@ -1496,6 +1515,52 @@ class BotController {
           this.adminMenu()
         );
       }
+      // ==================== Payment Callbacks ====================
+
+      // درخواست ارسال فیش
+      if (callbackData.startsWith("send_receipt_")) {
+        const orderId = parseInt(callbackData.split("_")[2]);
+        await BotService.deleteMessage(chatId, messageId);
+        await BotService.answerCallbackQuery(callbackQuery.id, "");
+        
+        const state = this.getUserState(chatId);
+        state.step = "upload_receipt";
+        state.data.order_id = orderId;
+        
+        return BotService.sendMessage(
+          chatId,
+          "📸 لطفاً عکس فیش واریزی را ارسال کنید:\n\n⚠️ مطمئن شوید که فیش واضح و خوانا باشد"
+        );
+      }
+
+      // لیست فیش‌های در انتظار (ادمین)
+      if (callbackData === "pending_receipts") {
+        await BotService.deleteMessage(chatId, messageId);
+        await BotService.answerCallbackQuery(callbackQuery.id, "");
+        return this.showPendingReceipts(chatId);
+      }
+
+      // بررسی فیش (ادمین)
+      if (callbackData.startsWith("verify_receipt_")) {
+        const paymentId = parseInt(callbackData.split("_")[2]);
+        await BotService.deleteMessage(chatId, messageId);
+        await BotService.answerCallbackQuery(callbackQuery.id, "");
+        return this.showReceiptForVerification(chatId, paymentId);
+      }
+
+      // تأیید فیش (ادمین)
+      if (callbackData.startsWith("approve_receipt_")) {
+        const paymentId = parseInt(callbackData.split("_")[2]);
+        await BotService.answerCallbackQuery(callbackQuery.id, "⏳ در حال تأیید...");
+        return this.approveReceipt(chatId, paymentId, user.id);
+      }
+
+      // رد فیش (ادمین)
+      if (callbackData.startsWith("reject_receipt_")) {
+        const paymentId = parseInt(callbackData.split("_")[2]);
+        await BotService.answerCallbackQuery(callbackQuery.id, "⏳ در حال رد...");
+        return this.rejectReceipt(chatId, paymentId, user.id);
+      }
 
     } catch (error) {
       logger.error(`خطا در handleCallback: ${error.message}`);
@@ -1648,6 +1713,288 @@ class BotController {
     ]);
 
     return BotService.sendMessage(chatId, message, keyboard);
+  }
+
+  // ==================== Payment Methods ====================
+  
+  /**
+   * نمایش اطلاعات حساب بانکی
+   */
+  async showBankInfo(chatId, orderId, userId) {
+    try {
+      const order = await Order.findById(orderId);
+
+      let message = `🏦 *اطلاعات واریز*\n\n`;
+      message += `💰 مبلغ قابل پرداخت: *${Helper.formatPrice(order.final_price)} تومان*\n`;
+      message += `🆔 شماره سفارش: #${order.id}\n`;
+      message += `📍 کد پیگیری: ${order.tracking_code}\n\n`;
+      
+      message += `📋 *مشخصات حساب:*\n`;
+      message += `🏦 بانک: ${process.env.BANK_NAME || 'ملی'}\n`;
+      message += `💳 شماره کارت:\n\`${process.env.CARD_NUMBER || '6037-9979-9999-9999'}\`\n`;
+      message += `👤 به نام: ${process.env.ACCOUNT_HOLDER || config.shop.name}\n`;
+      message += `🆔 شماره شبا:\n\`${process.env.SHEBA_NUMBER || 'IR99-0000-0000-0000-0000-0000-00'}\`\n\n`;
+      
+      message += `📌 *نکات مهم:*\n`;
+      message += `• مبلغ را دقیقاً ${Helper.formatPrice(order.final_price)} تومان واریز کنید\n`;
+      message += `• در توضیحات واریز حتماً شماره سفارش (${order.id}) را ذکر کنید\n`;
+      message += `• بعد از واریز، فیش را در همین چت ارسال کنید\n`;
+      message += `• تأیید فیش توسط ادمین حداکثر 24 ساعت طول می‌کشد\n\n`;
+      message += `⏰ لطفاً ظرف 24 ساعت پرداخت و ارسال فیش را انجام دهید`;
+
+      const keyboard = Helper.createInlineKeyboard([
+        [{ text: "📸 ارسال فیش واریزی", callback_data: `send_receipt_${orderId}` }],
+        [{ text: "🔙 بازگشت به منوی اصلی", callback_data: "back_main" }]
+      ]);
+
+      return BotService.sendMessage(chatId, message, keyboard);
+    } catch (error) {
+      logger.error(`خطا در showBankInfo: ${error.message}`);
+      return BotService.sendMessage(chatId, "❌ خطا در نمایش اطلاعات");
+    }
+  }
+
+  /**
+   * ذخیره فیش واریزی
+   */
+  async handleReceiptUpload(chatId, orderId, fileId, userId) {
+    try {
+      const paymentId = await Payment.saveReceipt(orderId, fileId, userId);
+      const order = await Order.findById(orderId);
+
+      let message = `✅ *فیش واریزی دریافت شد*\n\n`;
+      message += `🆔 سفارش: #${orderId}\n`;
+      message += `📍 کد پیگیری: ${order.tracking_code}\n`;
+      message += `📸 فیش شما ثبت شد و در حال بررسی است\n\n`;
+      message += `⏰ تأیید فیش توسط ادمین حداکثر 24 ساعت طول می‌کشد\n`;
+      message += `📱 نتیجه از طریق ربات به شما اطلاع داده می‌شود\n\n`;
+      message += `🙏 از صبر و شکیبایی شما سپاسگزاریم`;
+
+      await BotService.sendMessage(chatId, message, this.mainMenu());
+
+      // اطلاع به ادمین
+      await this.notifyAdminNewReceipt(paymentId, orderId);
+
+      return;
+    } catch (error) {
+      logger.error(`خطا در handleReceiptUpload: ${error.message}`);
+      return BotService.sendMessage(chatId, "❌ خطا در ذخیره فیش", this.mainMenu());
+    }
+  }
+
+  /**
+   * اطلاع به ادمین درباره فیش جدید
+   */
+  async notifyAdminNewReceipt(paymentId, orderId) {
+    try {
+      const order = await Order.findById(orderId);
+      const payment = await Payment.findById(paymentId);
+
+      let message = `🔔 *فیش واریزی جدید*\n\n`;
+      message += `🆔 سفارش: #${orderId}\n`;
+      message += `📍 کد پیگیری: ${order.tracking_code}\n`;
+      message += `👤 نام: ${order.full_name}\n`;
+      message += `📱 تلفن: ${order.phone}\n`;
+      message += `💰 مبلغ: ${Helper.formatPrice(order.final_price)} تومان\n`;
+      message += `📅 زمان ارسال: ${Helper.toJalali(new Date())}\n\n`;
+      message += `📸 فیش در انتظار بررسی است`;
+
+      const keyboard = Helper.createInlineKeyboard([
+        [{ text: "🔍 بررسی فیش", callback_data: `verify_receipt_${paymentId}` }],
+        [{ text: "🧾 لیست همه فیش‌ها", callback_data: "pending_receipts" }]
+      ]);
+
+      await BotService.sendMessage(config.bot.adminChatId, message, keyboard);
+    } catch (error) {
+      logger.error(`خطا در notifyAdminNewReceipt: ${error.message}`);
+    }
+  }
+
+  /**
+   * نمایش لیست فیش‌های در انتظار (ادمین)
+   */
+  async showPendingReceipts(chatId) {
+    try {
+      const pendingPayments = await Payment.getPendingVerifications();
+
+      if (pendingPayments.length === 0) {
+        return BotService.sendMessage(
+          chatId,
+          "✅ فیش واریزی در انتظار تأیید وجود ندارد.",
+          this.adminMenu()
+        );
+      }
+
+      let message = `🧾 *فیش‌های در انتظار تأیید*\n\nتعداد: ${pendingPayments.length}\n\n`;
+
+      const buttons = [];
+
+      pendingPayments.forEach((payment, index) => {
+        message += `${index + 1}. سفارش #${payment.order_id}\n`;
+        message += `   👤 ${payment.full_name}\n`;
+        message += `   💰 ${Helper.formatPrice(payment.amount)} تومان\n`;
+        message += `   📅 ${Helper.toJalali(payment.submitted_at)}\n\n`;
+
+        buttons.push([
+          { 
+            text: `بررسی #${payment.order_id} - ${payment.full_name}`, 
+            callback_data: `verify_receipt_${payment.id}` 
+          }
+        ]);
+      });
+
+      buttons.push([{ text: "🔙 بازگشت", callback_data: "admin_back" }]);
+
+      return BotService.sendMessage(
+        chatId,
+        message,
+        Helper.createInlineKeyboard(buttons)
+      );
+    } catch (error) {
+      logger.error(`خطا در showPendingReceipts: ${error.message}`);
+      return BotService.sendMessage(chatId, "❌ خطا در نمایش فیش‌ها");
+    }
+  }
+
+  /**
+   * نمایش جزئیات فیش برای تأیید (ادمین)
+   */
+  async showReceiptForVerification(chatId, paymentId) {
+    try {
+      const payment = await Payment.findById(paymentId);
+
+      if (!payment) {
+        return BotService.sendMessage(chatId, "❌ فیش یافت نشد!");
+      }
+
+      const order = await Order.findById(payment.order_id);
+
+      let message = `🧾 *بررسی فیش واریزی*\n\n`;
+      message += `🆔 سفارش: #${order.id}\n`;
+      message += `📍 کد پیگیری: ${order.tracking_code}\n`;
+      message += `👤 نام: ${order.full_name}\n`;
+      message += `📱 تلفن: ${order.phone}\n`;
+      message += `📍 آدرس: ${Helper.truncate(order.address, 50)}\n`;
+      message += `💰 مبلغ: ${Helper.formatPrice(payment.amount)} تومان\n`;
+      message += `📅 ارسال فیش: ${Helper.toJalali(payment.submitted_at)}\n\n`;
+      message += `📸 فیش واریزی:`;
+
+      await BotService.sendMessage(chatId, message);
+
+      // ارسال عکس فیش
+      if (payment.receipt_image) {
+        await BotService.sendPhoto(chatId, payment.receipt_image, "فیش واریزی");
+      }
+
+      // دکمه‌های تأیید/رد
+      const keyboard = Helper.createInlineKeyboard([
+        [
+          { text: "✅ تأیید فیش", callback_data: `approve_receipt_${payment.id}` },
+          { text: "❌ رد فیش", callback_data: `reject_receipt_${payment.id}` }
+        ],
+        [{ text: "🔙 بازگشت به لیست", callback_data: "pending_receipts" }]
+      ]);
+
+      return BotService.sendMessage(chatId, "انتخاب کنید:", keyboard);
+    } catch (error) {
+      logger.error(`خطا در showReceiptForVerification: ${error.message}`);
+      return BotService.sendMessage(chatId, "❌ خطا در نمایش فیش");
+    }
+  }
+
+  /**
+   * تأیید فیش توسط ادمین
+   */
+  async approveReceipt(chatId, paymentId, adminId) {
+    try {
+      const payment = await Payment.findById(paymentId);
+
+      if (!payment) {
+        return BotService.sendMessage(chatId, "❌ فیش یافت نشد!");
+      }
+
+      // تأیید فیش
+      await Payment.verifyReceipt(paymentId, adminId, true);
+
+      // به‌روزرسانی وضعیت سفارش
+      await Order.updatePaymentStatus(payment.order_id, "paid");
+      await Order.updateStatus(payment.order_id, "confirmed");
+
+      // اطلاع به کاربر
+      const order = await Order.findById(payment.order_id);
+      const user = await User.findById(payment.user_id);
+
+      let userMessage = `✅ *فیش واریزی شما تأیید شد*\n\n`;
+      userMessage += `🆔 سفارش: #${order.id}\n`;
+      userMessage += `📍 کد پیگیری: ${order.tracking_code}\n`;
+      userMessage += `💰 مبلغ: ${Helper.formatPrice(payment.amount)} تومان\n\n`;
+      userMessage += `✅ سفارش شما تأیید شد و به زودی ارسال می‌شود\n`;
+      userMessage += `📦 وضعیت سفارش: در حال آماده‌سازی\n\n`;
+      userMessage += `🙏 از خرید شما متشکریم`;
+
+      await BotService.sendMessage(user.chat_id, userMessage);
+
+      await BotService.sendMessage(
+        chatId,
+        `✅ فیش تأیید شد!\n\nسفارش #${order.id} به وضعیت "تأیید شده" تغییر کرد.\nکاربر مطلع شد.`
+      );
+
+      // بازگشت به لیست
+      return this.showPendingReceipts(chatId);
+    } catch (error) {
+      logger.error(`خطا در approveReceipt: ${error.message}`);
+      return BotService.sendMessage(chatId, "❌ خطا در تأیید فیش");
+    }
+  }
+
+  /**
+   * رد فیش توسط ادمین
+   */
+  async rejectReceipt(chatId, paymentId, adminId) {
+    try {
+      const payment = await Payment.findById(paymentId);
+
+      if (!payment) {
+        return BotService.sendMessage(chatId, "❌ فیش یافت نشد!");
+      }
+
+      // رد فیش
+      await Payment.verifyReceipt(paymentId, adminId, false, "فیش نامعتبر است");
+
+      // اطلاع به کاربر
+      const order = await Order.findById(payment.order_id);
+      const user = await User.findById(payment.user_id);
+
+      let userMessage = `❌ *فیش واریزی رد شد*\n\n`;
+      userMessage += `🆔 سفارش: #${order.id}\n`;
+      userMessage += `📍 کد پیگیری: ${order.tracking_code}\n\n`;
+      userMessage += `⚠️ متأسفانه فیش ارسالی شما تأیید نشد.\n\n`;
+      userMessage += `دلایل احتمالی:\n`;
+      userMessage += `• مبلغ واریزی با مبلغ سفارش مطابقت ندارد\n`;
+      userMessage += `• فیش واضح و خوانا نیست\n`;
+      userMessage += `• اطلاعات واریز کامل نیست\n\n`;
+      userMessage += `لطفاً:\n`;
+      userMessage += `• مبلغ دقیق (${Helper.formatPrice(order.final_price)} تومان) را واریز کنید\n`;
+      userMessage += `• فیش واضح و کامل را ارسال کنید\n`;
+      userMessage += `• یا با پشتیبانی تماس بگیرید\n\n`;
+      userMessage += `☎️ پشتیبانی: @moha_st`;
+
+      await BotService.sendMessage(user.chat_id, userMessage);
+
+      // نمایش اطلاعات حساب دوباره
+      await this.showBankInfo(user.chat_id, order.id, user.id);
+
+      await BotService.sendMessage(
+        chatId,
+        `❌ فیش رد شد!\nکاربر مطلع شد و اطلاعات حساب مجدداً برایش ارسال شد.`
+      );
+
+      // بازگشت به لیست
+      return this.showPendingReceipts(chatId);
+    } catch (error) {
+      logger.error(`خطا در rejectReceipt: ${error.message}`);
+      return BotService.sendMessage(chatId, "❌ خطا در رد فیش");
+    }
   }
 }
 
