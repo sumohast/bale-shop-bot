@@ -636,7 +636,7 @@ class BotController {
 
       await BotService.sendMessage(chatId, receipt, this.mainMenu());
 
-      await NotificationService.newOrderToAdmin(order, cartData.items);
+      //await NotificationService.newOrderToAdmin(order, cartData.items);
       await Cart.clear(userId);
 
       // نمایش اطلاعات حساب بانکی و درخواست فیش

@@ -10916,3 +10916,10 @@
 2026-02-09 01:02:06 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
 2026-02-09 01:02:26 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
 2026-02-09 01:02:46 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-09 01:03:16 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-09 01:15:05 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-09 01:15:36 [error]: خطا در sendPhoto: Request failed with status code 400
+2026-02-09 01:15:42 [error]: خطا در answerCallbackQuery: Request failed with status code 400
+2026-02-09 01:15:42 [error]: خطا در handleCallback: Request failed with status code 400
+2026-02-09 01:15:43 [error]: خطا در answerCallbackQuery: Request failed with status code 400
+2026-02-09 01:15:43 [error]: Unhandled Rejection at: [object Promise], reason: AxiosError: Request failed with status code 400
