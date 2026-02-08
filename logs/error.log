@@ -687,3 +687,18 @@
 2026-02-08 01:32:46 [error]: خطا در getUpdates: timeout of 30000ms exceeded
 2026-02-08 01:34:06 [error]: خطا در getUpdates: timeout of 30000ms exceeded
 2026-02-08 01:38:27 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-08 10:57:15 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-08 10:57:48 [error]: خطا در پردازش آپدیت: data is not defined
+2026-02-08 11:04:15 [error]: خطا در پردازش آپدیت: data is not defined
+2026-02-08 11:04:18 [error]: خطا در پردازش آپدیت: data is not defined
+2026-02-08 11:04:20 [error]: خطا در پردازش آپدیت: data is not defined
+2026-02-08 11:12:27 [error]: خطا در پردازش آپدیت: data is not defined
+2026-02-08 11:12:52 [error]: خطا در پردازش آپدیت: callbackData is not defined
+2026-02-08 11:46:10 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-08 11:47:05 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-08 11:59:21 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-08 12:03:29 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-08 12:09:26 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-08 12:17:26 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-08 12:20:33 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-08 13:25:08 [error]: خطا در getUpdates: timeout of 30000ms exceeded
