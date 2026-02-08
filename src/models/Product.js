@@ -3,7 +3,7 @@ const logger = require("../utils/logger");
 
 class Product {
   /**
-   * دریافت تمام محصولات فعال
+   * دریافت تمام محصولات فعال (برای کاربران)
    */
   static async getAll(categoryId = null) {
     try {
@@ -21,6 +21,29 @@ class Product {
       return rows;
     } catch (error) {
       logger.error(`خطا در getAll products: ${error.message}`);
+      throw error;
+    }
+  }
+
+  /**
+   * دریافت تمام محصولات (فعال و غیرفعال) - برای ادمین
+   */
+  static async getAllIncludingInactive(categoryId = null) {
+    try {
+      let query = "SELECT * FROM products WHERE 1=1";
+      const params = [];
+
+      if (categoryId) {
+        query += " AND category_id = ?";
+        params.push(categoryId);
+      }
+
+      query += " ORDER BY is_active DESC, is_featured DESC, created_at DESC";
+
+      const [rows] = await db.query(query, params);
+      return rows;
+    } catch (error) {
+      logger.error(`خطا در getAllIncludingInactive products: ${error.message}`);
       throw error;
     }
   }

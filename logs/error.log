@@ -702,3 +702,26 @@
 2026-02-08 12:17:26 [error]: خطا در getUpdates: timeout of 30000ms exceeded
 2026-02-08 12:20:33 [error]: خطا در getUpdates: timeout of 30000ms exceeded
 2026-02-08 13:25:08 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-08 14:18:37 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-08 16:18:49 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-08 16:19:09 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-08 16:19:29 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-08 16:21:10 [error]: خطا در sendPhoto: Request failed with status code 400
+2026-02-08 16:26:19 [error]: خطا در sendPhoto: Request failed with status code 400
+2026-02-08 16:26:34 [error]: خطا در deleteMessage: Request failed with status code 404
+2026-02-08 16:26:34 [error]: خطا در handleCallback: Request failed with status code 404
+2026-02-08 16:26:37 [error]: خطا در deleteMessage: Request failed with status code 404
+2026-02-08 16:26:37 [error]: خطا در handleCallback: Request failed with status code 404
+2026-02-08 16:27:51 [error]: خطا در sendPhoto: Request failed with status code 400
+2026-02-08 16:29:18 [error]: خطا در sendPhoto: Request failed with status code 400
+2026-02-08 16:51:00 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-08 16:54:01 [error]: خطا در sendPhoto: Request failed with status code 400
+2026-02-08 16:58:00 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-08 17:00:11 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-08 17:02:19 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-08 17:02:39 [error]: خطا در sendPhoto: Request failed with status code 400
+2026-02-08 17:03:52 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-08 17:12:23 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-08 17:12:53 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-08 17:25:52 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-08 17:26:05 [error]: خطا در showProductsList: array.slice is not a function

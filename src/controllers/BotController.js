@@ -42,6 +42,7 @@ class BotController {
       [{ text: "📊 آمار کلی" }],
       [{ text: "📋 مدیریت سفارش‌ها" }, { text: "👥 مدیریت کاربران" }],
       [{ text: "📦 مدیریت محصولات" }, { text: "➕ افزودن محصول" }],
+      [{ text: "📂 مدیریت دسته‌بندی‌ها" }, { text: "➕ افزودن دسته‌بندی" }],
       [{ text: "🎁 مدیریت کدهای تخفیف" }, { text: "➕ ایجاد کد تخفیف" }],
       [{ text: "📢 ارسال پیام همگانی" }],
       [{ text: "🔙 برگشت به منوی کاربر" }],
@@ -78,6 +79,8 @@ class BotController {
         if (text === "👥 مدیریت کاربران") return this.showUsersList(chatId);
         if (text === "📦 مدیریت محصولات") return this.showProductsList(chatId);
         if (text === "➕ افزودن محصول") return this.startAddProduct(chatId);
+        if (text === "📂 مدیریت دسته‌بندی‌ها") return this.showCategoriesList(chatId);
+        if (text === "➕ افزودن دسته‌بندی") return this.startAddCategory(chatId);
         if (text === "🎁 مدیریت کدهای تخفیف") return this.showDiscountCodes(chatId);
         if (text === "➕ ایجاد کد تخفیف") return this.startCreateDiscount(chatId);
         
@@ -142,7 +145,13 @@ class BotController {
       if (!Validator.isValidName(text)) {
         return BotService.sendMessage(chatId, "❌ نام معتبر نیست. دوباره وارد کنید:");
       }
+      // حفظ اطلاعات تخفیف
+      const discountCode = state.data.discount_code;
+      const discountAmount = state.data.discount_amount;
+      
       state.data.full_name = Validator.sanitizeText(text);
+      state.data.discount_code = discountCode; // بازگرداندن اطلاعات تخفیف
+      state.data.discount_amount = discountAmount;
       state.step = "checkout_phone";
       return BotService.sendMessage(chatId, "📱 شماره تماس:\n(مثال: 09123456789)");
     }
@@ -152,7 +161,13 @@ class BotController {
       if (!Validator.isValidPhone(phone)) {
         return BotService.sendMessage(chatId, "❌ شماره تلفن نامعتبر:");
       }
+      // حفظ اطلاعات تخفیف
+      const discountCode = state.data.discount_code;
+      const discountAmount = state.data.discount_amount;
+      
       state.data.phone = phone;
+      state.data.discount_code = discountCode;
+      state.data.discount_amount = discountAmount;
       state.step = "checkout_address";
       return BotService.sendMessage(chatId, "📍 آدرس کامل:");
     }
@@ -161,7 +176,13 @@ class BotController {
       if (!Validator.isValidAddress(text)) {
         return BotService.sendMessage(chatId, "❌ آدرس باید حداقل 10 کاراکتر باشد:");
       }
+      // حفظ اطلاعات تخفیف
+      const discountCode = state.data.discount_code;
+      const discountAmount = state.data.discount_amount;
+      
       state.data.address = Validator.sanitizeText(text);
+      state.data.discount_code = discountCode;
+      state.data.discount_amount = discountAmount;
       state.step = "checkout_postal";
       return BotService.sendMessage(chatId, "📮 کد پستی 10 رقمی:\n(یا 0 برای رد کردن)");
     }
@@ -172,6 +193,7 @@ class BotController {
         return BotService.sendMessage(chatId, "❌ کد پستی باید 10 رقم باشد:");
       }
       state.data.postal_code = postal;
+      // اطلاعات تخفیف قبلاً در state.data هست
       return this.completeCheckout(chatId, userId, state.data);
     }
 
@@ -187,6 +209,57 @@ class BotController {
 
     // Admin - Create Discount Code Flow
     if (isAdmin) {
+      // Add Category Flow
+      if (state.step === "add_category_title") {
+        state.data.title = Validator.sanitizeText(text);
+        state.step = "add_category_icon";
+        return BotService.sendMessage(chatId, `نام: ${state.data.title}\n\nآیکون دسته‌بندی:\n(مثل: 📱 یا 0 برای بدون آیکون)`);
+      }
+      if (state.step === "add_category_icon") {
+        state.data.icon = text === "0" ? null : text.trim();
+        state.step = "add_category_description";
+        return BotService.sendMessage(chatId, "توضیحات دسته‌بندی:\n(یا 0 برای رد کردن)");
+      }
+      if (state.step === "add_category_description") {
+        state.data.description = text === "0" ? null : Validator.sanitizeText(text);
+        state.step = "add_category_sort";
+        return BotService.sendMessage(chatId, "ترتیب نمایش (عدد):\n(یا 0 برای پیش‌فرض)");
+      }
+      if (state.step === "add_category_sort") {
+        state.data.sort_order = parseInt(text) || 0;
+        return this.saveCategory(chatId, state.data);
+      }
+
+      // Edit Category Flow
+      if (state.step === "edit_category_title") {
+        if (text === "/cancel") {
+          this.clearUserState(chatId);
+          await BotService.sendMessage(chatId, "❌ ویرایش لغو شد.", this.adminMenu());
+          return;
+        }
+        const { categoryId } = state.data;
+        await Category.update(categoryId, { title: text });
+        state.step = "edit_category_icon";
+        return BotService.sendMessage(chatId, `نام جدید ذخیره شد.\n\nآیکون جدید:\n(یا 0 برای بدون تغییر)`);
+      }
+      if (state.step === "edit_category_icon") {
+        const { categoryId } = state.data;
+        if (text !== "0") {
+          await Category.update(categoryId, { icon: text.trim() });
+        }
+        state.step = "edit_category_description";
+        return BotService.sendMessage(chatId, "توضیحات جدید:\n(یا 0 برای بدون تغییر)");
+      }
+      if (state.step === "edit_category_description") {
+        const { categoryId } = state.data;
+        if (text !== "0") {
+          await Category.update(categoryId, { description: text });
+        }
+        this.clearUserState(chatId);
+        await BotService.sendMessage(chatId, "✅ دسته‌بندی با موفقیت ویرایش شد!", this.adminMenu());
+        return this.showCategoriesList(chatId);
+      }
+
       if (state.step === "create_discount_code") {
         state.data.code = Validator.sanitizeText(text).toUpperCase();
         state.step = "create_discount_type";
@@ -470,7 +543,11 @@ class BotController {
 
       const state = this.getUserState(chatId);
       state.step = "checkout_name";
-      state.data = {};
+      // حفظ اطلاعات تخفیف از قبل (اگر وجود داره)
+      if (!state.data) {
+        state.data = {};
+      }
+      // discount_code و discount_amount از قبل در state هست و حفظ میشه
 
       return BotService.sendMessage(chatId, "✅ ثبت سفارش\n\n👤 نام و نام خانوادگی:");
     } catch (error) {
@@ -489,11 +566,16 @@ class BotController {
       }
 
       const state = this.getUserState(chatId);
-      const discountCode = state.data.discount_code;
-      const discountAmount = state.data.discount_amount || 0;
+      const discountCode = orderData.discount_code || state.data.discount_code;
+      const discountAmount = orderData.discount_amount || state.data.discount_amount || 0;
+
+      logger.info(`Checkout - Discount Code: ${discountCode ? discountCode.code : 'none'}, Amount: ${discountAmount}`);
 
       const orderId = await Order.create(userId, {
-        ...orderData,
+        full_name: orderData.full_name,
+        phone: orderData.phone,
+        address: orderData.address,
+        postal_code: orderData.postal_code,
         total_price: cartData.total,
         discount_amount: discountAmount,
         items: cartData.items,
@@ -501,13 +583,42 @@ class BotController {
 
       const order = await Order.findById(orderId);
 
-      if (discountCode) {
+      if (discountCode && discountCode.id) {
         await DiscountCode.recordUsage(discountCode.id, userId, orderId);
       }
 
       this.clearUserState(chatId);
 
-      await NotificationService.orderCreated(order, cartData.items);
+      // ارسال رسید به کاربر
+      let receipt = `✅ *سفارش شما ثبت شد!*\n\n`;
+      receipt += `🆔 شماره سفارش: ${order.id}\n`;
+      receipt += `📍 کد پیگیری: ${order.tracking_code}\n`;
+      receipt += `📅 تاریخ: ${Helper.toJalali(order.created_at)}\n\n`;
+      
+      receipt += `📦 *اقلام سفارش:*\n`;
+      cartData.items.forEach((item, index) => {
+        const price = item.discount_price || item.price;
+        receipt += `${index + 1}. ${item.name} × ${item.quantity}\n`;
+        receipt += `   ${Helper.formatPrice(price * item.quantity)} تومان\n`;
+      });
+      
+      receipt += `\n💰 جمع کل: ${Helper.formatPrice(order.total_price)} تومان\n`;
+      
+      if (discountAmount > 0) {
+        receipt += `🎁 تخفیف: ${Helper.formatPrice(discountAmount)} تومان\n`;
+      }
+      
+      if (order.tax_amount > 0) {
+        receipt += `📊 مالیات: ${Helper.formatPrice(order.tax_amount)} تومان\n`;
+      }
+      
+      receipt += `\n💵 *مبلغ نهایی: ${Helper.formatPrice(order.final_price)} تومان*\n\n`;
+      receipt += `📌 وضعیت: ${Helper.translateOrderStatus(order.status)}\n`;
+      receipt += `💳 پرداخت: ${Helper.translatePaymentStatus(order.payment_status)}\n\n`;
+      receipt += `سفارش شما در حال بررسی است و به زودی تایید خواهد شد.`;
+
+      await BotService.sendMessage(chatId, receipt, this.mainMenu());
+
       await NotificationService.newOrderToAdmin(order, cartData.items);
       await Cart.clear(userId);
 
@@ -718,14 +829,15 @@ class BotController {
   // ==================== Admin - Product Management ====================
   async showProductsList(chatId, page = 1) {
     try {
-      const products = await Product.getAll();
+      const products = await Product.getAllIncludingInactive(); // این همه محصولات رو برمی‌گردونه (فعال و غیرفعال)
       const paginated = Helper.paginate(products, page, 8);
 
       if (paginated.data.length === 0) {
         return BotService.sendMessage(chatId, "محصولی یافت نشد.", this.adminMenu());
       }
 
-      let message = `📦 *مدیریت محصولات* (صفحه ${paginated.page}/${paginated.totalPages})\n\n`;
+      let message = `📦 *مدیریت محصولات* (صفحه ${paginated.page}/${paginated.totalPages})\n`;
+      message += `کل: ${products.length} محصول\n\n`;
       const keyboard = [];
 
       for (const product of paginated.data) {
@@ -860,6 +972,103 @@ class BotController {
       );
     } catch (error) {
       logger.error(`خطا در saveProduct: ${error.message}`);
+      this.clearUserState(chatId);
+      return BotService.sendMessage(chatId, `❌ خطا: ${error.message}`);
+    }
+  }
+
+  // ==================== Admin - Category Management ====================
+  async showCategoriesList(chatId) {
+    try {
+      const categories = await Category.getAllIncludingInactive();
+
+      if (categories.length === 0) {
+        return BotService.sendMessage(chatId, "هیچ دسته‌بندی‌ای موجود نیست.", this.adminMenu());
+      }
+
+      let message = `📂 *مدیریت دسته‌بندی‌ها*\n\nتعداد: ${categories.length}\n\n`;
+      const keyboard = [];
+
+      categories.forEach((category, index) => {
+        const status = category.is_active ? "🟢" : "🔴";
+        message += `${index + 1}. ${status} ${category.icon || "📂"} ${category.title}\n`;
+        if (category.description) {
+          message += `   ${Helper.truncate(category.description, 50)}\n`;
+        }
+        message += `\n`;
+
+        keyboard.push([
+          { 
+            text: `${status} ${category.icon || "📂"} ${category.title}`, 
+            callback_data: `category_manage_${category.id}` 
+          }
+        ]);
+      });
+
+      keyboard.push([{ text: "🔙 بازگشت", callback_data: "admin_back" }]);
+
+      return BotService.sendMessage(chatId, message, Helper.createInlineKeyboard(keyboard));
+    } catch (error) {
+      logger.error(`خطا در showCategoriesList: ${error.message}`);
+      throw error;
+    }
+  }
+
+  async showCategoryManagement(chatId, categoryId) {
+    try {
+      const category = await Category.findById(categoryId);
+
+      if (!category) {
+        return BotService.sendMessage(chatId, "❌ دسته‌بندی پیدا نشد!");
+      }
+
+      let message = `📂 *مدیریت دسته‌بندی*\n\n`;
+      message += `🆔 شناسه: ${category.id}\n`;
+      message += `${category.icon || "📂"} نام: ${category.title}\n`;
+      if (category.description) {
+        message += `📝 توضیحات: ${category.description}\n`;
+      }
+      message += `📊 ترتیب نمایش: ${category.sort_order}\n`;
+      message += `📊 وضعیت: ${category.is_active ? "فعال 🟢" : "غیرفعال 🔴"}\n`;
+
+      const buttons = [
+        [
+          { text: "✏️ ویرایش", callback_data: `category_edit_${category.id}` },
+          { 
+            text: category.is_active ? "❌ غیرفعال کردن" : "✅ فعال کردن", 
+            callback_data: `category_toggle_${category.id}` 
+          },
+        ],
+        [{ text: "🗑 حذف دسته‌بندی", callback_data: `category_delete_${category.id}` }],
+        [{ text: "🔙 برگشت به لیست", callback_data: "back_categories_list" }],
+      ];
+
+      return BotService.sendMessage(chatId, message, Helper.createInlineKeyboard(buttons));
+    } catch (error) {
+      logger.error(`خطا در showCategoryManagement: ${error.message}`);
+      throw error;
+    }
+  }
+
+  async startAddCategory(chatId) {
+    const state = this.getUserState(chatId);
+    state.step = "add_category_title";
+    state.data = {};
+    return BotService.sendMessage(chatId, "➕ *افزودن دسته‌بندی*\n\nنام دسته‌بندی را وارد کنید:");
+  }
+
+  async saveCategory(chatId, categoryData) {
+    try {
+      const categoryId = await Category.create(categoryData);
+      this.clearUserState(chatId);
+
+      return BotService.sendMessage(
+        chatId,
+        `✅ دسته‌بندی اضافه شد!\n\n🆔 ${categoryId}\n📂 ${categoryData.title}`,
+        this.adminMenu()
+      );
+    } catch (error) {
+      logger.error(`خطا در saveCategory: ${error.message}`);
       this.clearUserState(chatId);
       return BotService.sendMessage(chatId, `❌ خطا: ${error.message}`);
     }
@@ -1025,7 +1234,8 @@ class BotController {
 
       // ==================== Checkout ====================
       if (callbackData === "checkout_start") {
-        await BotService.deleteMessage(chatId, messageId);
+        // IMPORTANT: Don't delete message to preserve state
+        // await BotService.deleteMessage(chatId, messageId);
         return this.startCheckout(chatId, user.id);
       }
 
@@ -1185,6 +1395,80 @@ class BotController {
         await this.showProductsList(chatId, page);
         await BotService.answerCallbackQuery(callbackQuery.id, "");
         return;
+      }
+
+      // ==================== Category Management ====================
+      if (callbackData.startsWith("category_manage_")) {
+        const categoryId = parseInt(callbackData.split("_")[2]);
+        await BotService.deleteMessage(chatId, messageId);
+        return this.showCategoryManagement(chatId, categoryId);
+      }
+
+      if (callbackData === "back_categories_list") {
+        await BotService.deleteMessage(chatId, messageId);
+        return this.showCategoriesList(chatId);
+      }
+
+      if (callbackData.startsWith("category_edit_")) {
+        const categoryId = parseInt(callbackData.split("_")[2]);
+        const category = await Category.findById(categoryId);
+        this.userStates.set(chatId, { 
+          step: "edit_category_title", 
+          data: { categoryId } 
+        });
+        await BotService.deleteMessage(chatId, messageId);
+        await BotService.answerCallbackQuery(callbackQuery.id, "✏️ ویرایش دسته‌بندی");
+        return BotService.sendMessage(chatId, `✏️ ویرایش: ${category.title}\n\nنام جدید را وارد کنید (یا /cancel):`);
+      }
+
+      if (callbackData.startsWith("category_toggle_")) {
+        const categoryId = parseInt(callbackData.split("_")[2]);
+        const category = await Category.findById(categoryId);
+        const newStatus = !category.is_active;
+        await Category.update(categoryId, { is_active: newStatus });
+        
+        const statusText = newStatus ? "فعال" : "غیرفعال";
+        await BotService.answerCallbackQuery(callbackQuery.id, `✅ دسته‌بندی ${statusText} شد`);
+        await BotService.deleteMessage(chatId, messageId);
+        return this.showCategoryManagement(chatId, categoryId);
+      }
+
+      if (callbackData.startsWith("category_delete_")) {
+        const categoryId = parseInt(callbackData.split("_")[2]);
+        const category = await Category.findById(categoryId);
+
+        const keyboard = Helper.createInlineKeyboard([
+          [
+            { text: "✅ بله، حذف شود", callback_data: `confirm_delete_category_${categoryId}` },
+            { text: "❌ خیر", callback_data: `category_manage_${categoryId}` },
+          ],
+        ]);
+
+        await BotService.deleteMessage(chatId, messageId);
+        await BotService.answerCallbackQuery(callbackQuery.id, "");
+        
+        return BotService.sendMessage(
+          chatId,
+          `⚠️ *هشدار!*\n\nآیا مطمئن هستید که می‌خواهید دسته‌بندی "${category.title}" را حذف کنید؟\n\n⚠️ تمام محصولات این دسته نیز غیرفعال می‌شوند!`,
+          keyboard
+        );
+      }
+
+      if (callbackData.startsWith("confirm_delete_category_")) {
+        const categoryId = parseInt(callbackData.split("_")[3]);
+        const category = await Category.findById(categoryId);
+        
+        await Category.delete(categoryId);
+        await BotService.answerCallbackQuery(callbackQuery.id, "🗑 دسته‌بندی حذف شد");
+        await BotService.deleteMessage(chatId, messageId);
+        
+        await BotService.sendMessage(
+          chatId,
+          `✅ دسته‌بندی "${category.title}" حذف شد.`,
+          this.adminMenu()
+        );
+        
+        return this.showCategoriesList(chatId);
       }
 
       // ==================== Discount Code Management ====================
