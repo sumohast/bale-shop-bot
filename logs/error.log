@@ -10923,3 +10923,29 @@
 2026-02-09 01:15:42 [error]: خطا در handleCallback: Request failed with status code 400
 2026-02-09 01:15:43 [error]: خطا در answerCallbackQuery: Request failed with status code 400
 2026-02-09 01:15:43 [error]: Unhandled Rejection at: [object Promise], reason: AxiosError: Request failed with status code 400
+2026-02-09 01:22:52 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-09 01:23:22 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-09 14:17:55 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-09 14:40:04 [error]: خطا در sendPhoto: Request failed with status code 400
+2026-02-09 14:40:08 [error]: خطا در sendPhoto: Request failed with status code 400
+2026-02-09 14:40:24 [error]: خطا در downloadFile: BotService.getFile is not a function
+2026-02-09 14:40:24 [error]: خطا در saveProductImage: BotService.getFile is not a function
+2026-02-09 14:40:24 [error]: خطا در handleMessage: BotService.getFile is not a function
+2026-02-09 14:41:12 [error]: خطا در sendPhoto: Request failed with status code 400
+2026-02-09 14:41:26 [error]: خطا در sendPhoto: Request failed with status code 400
+2026-02-09 14:44:32 [error]: خطا در sendPhoto: Request failed with status code 400
+2026-02-09 14:44:38 [error]: خطا در sendPhoto: Request failed with status code 400
+2026-02-09 14:44:56 [error]: خطا در sendPhoto: Request failed with status code 400
+2026-02-09 14:44:57 [error]: خطا در sendPhoto: Request failed with status code 400
+2026-02-09 15:33:41 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-09 15:36:19 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-09 15:37:39 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-09 15:41:08 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-09 15:45:25 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-09 15:45:25 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-09 15:45:45 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-09 15:46:05 [error]: خطا در getUpdates: getaddrinfo EAI_AGAIN tapi.bale.ai
+2026-02-09 15:46:35 [error]: خطا در getUpdates: timeout of 30000ms exceeded
+2026-02-09 16:05:17 [error]: خطا در sendPhoto: Request failed with status code 400
+2026-02-09 16:05:31 [error]: خطا در sendPhoto: Request failed with status code 400
+2026-02-09 16:25:56 [error]: خطا در sendPhoto: Request failed with status code 400

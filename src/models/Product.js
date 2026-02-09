@@ -1,5 +1,6 @@
 const db = require("../config/database");
 const logger = require("../utils/logger");
+const FileManager = require("../utils/FileManager");
 
 class Product {
   /**
@@ -182,10 +183,19 @@ class Product {
    */
   static async hardDelete(id) {
     try {
+      // دریافت اطلاعات محصول
+      const product = await this.findById(id);
+      
+      if (product && product.image_url) {
+        // حذف file_id از دیتابیس (فایل واقعی روی سرور بله می‌مونه)
+        FileManager.deleteProductImage(product.image_url);
+      }
+
+      // حذف از دیتابیس
       await db.query("DELETE FROM products WHERE id = ?", [id]);
       logger.info(`محصول ${id} به طور کامل حذف شد`);
     } catch (error) {
-      logger.error(`خطا در hardDelete product: ${error.message}`);
+      logger.error(`خطا در hardDelete: ${error.message}`);
       throw error;
     }
   }

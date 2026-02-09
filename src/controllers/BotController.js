@@ -11,6 +11,7 @@ const Validator = require("../utils/validator");
 const logger = require("../utils/logger");
 const config = require("../config/config");
 const Payment = require("../models/Payment");
+const FileManager = require("../utils/FileManager");
 
 class BotController {
   constructor() {
@@ -79,6 +80,47 @@ class BotController {
           
           this.clearUserState(chatId);
           return this.handleReceiptUpload(chatId, orderId, fileId, user.id);
+        }
+      }
+
+      // بررسی آپلود عکس محصول (ادمین)
+      if (photo && isAdmin) {
+        const state = this.getUserState(chatId);
+        
+        if (state.step === "add_product_image") {
+          const fileId = photo[photo.length - 1].file_id;
+          state.data.image_file_id = fileId;
+          
+          await BotService.sendMessage(chatId, "✅ عکس دریافت شد!\n\nآیا محصول ویژه باشد؟ (بله/خیر)");
+          state.step = "add_product_featured";
+          return;
+        }
+        
+        if (state.step === "edit_product_image") {
+          const fileId = photo[photo.length - 1].file_id;
+          const { productId, product } = state.data;
+          
+          try {
+            await BotService.sendMessage(chatId, "⏳ در حال ذخیره عکس...");
+            
+            // حذف file_id قدیمی (فقط از دیتابیس)
+            if (product.image_url) {
+              FileManager.deleteProductImage(product.image_url);
+            }
+            
+            // ذخیره file_id جدید
+            const newFileId = await FileManager.saveProductImage(fileId, productId);
+            await Product.update(productId, { image_url: newFileId });
+            
+            this.clearUserState(chatId);
+            await BotService.sendMessage(chatId, "✅ عکس محصول تغییر کرد!");
+            
+            return this.showProductManagement(chatId, productId);
+          } catch (error) {
+            logger.error(`خطا در ویرایش عکس: ${error.message}`);
+            await BotService.sendMessage(chatId, "❌ خطا در ذخیره عکس");
+            return;
+          }
         }
       }
 
@@ -362,10 +404,18 @@ class BotController {
         state.data.field = "image_url";
         await BotService.sendMessage(chatId, `موجودی: ${text}\n\nلینک عکس جدید را وارد کنید (یا 0 برای بدون تغییر):`);
       } else if (field === "image_url") {
-        if (text !== "0") updates.image_url = text;
-        state.data.field = "is_featured";
-        await BotService.sendMessage(chatId, "عکس ذخیره شد.\n\nآیا ویژه باشد؟ (بله/خیر):");
-      } else if (field === "is_featured") {
+          if (text === "0") {
+            // بدون تغییر
+            state.data.field = "is_featured";
+            await BotService.sendMessage(chatId, "عکس بدون تغییر ماند.\n\nآیا ویژه باشد؟ (بله/خیر):");
+          } else {
+            // منتظر دریافت عکس جدید
+            await BotService.sendMessage(chatId, "📸 لطفاً عکس جدید را ارسال کنید:");
+            state.step = "edit_product_image";
+            return;
+          }
+        }
+        else if (field === "is_featured") {
         updates.is_featured = text.toLowerCase() === "بله" || text.toLowerCase() === "yes";
         
         // ذخیره نهایی
@@ -411,10 +461,24 @@ class BotController {
       if (state.step === "add_product_description") {
         state.data.description = text === "0" ? null : Validator.sanitizeText(text);
         state.step = "add_product_image";
-        return BotService.sendMessage(chatId, "🖼 لینک عکس محصول:\n(یا 0 برای بدون عکس)");
+        return BotService.sendMessage(chatId, "📸 عکس محصول را ارسال کنید:\n(یا 0 برای بدون عکس)");
       }
+
       if (state.step === "add_product_image") {
-        state.data.image_url = text === "0" ? null : text.trim();
+        if (text === "0") {
+          // بدون عکس
+          state.data.image_url = null;
+          state.data.is_featured = false;
+          return this.saveProduct(chatId, state.data);
+        } else {
+          // منتظر دریافت عکس
+          return BotService.sendMessage(chatId, "⚠️ لطفاً عکس را به صورت فایل ارسال کنید (نه متن)");
+        }
+      }
+
+      if (state.step === "add_product_featured") {
+        const isFeatured = text.toLowerCase() === "بله" || text.toLowerCase() === "yes";
+        state.data.is_featured = isFeatured;
         return this.saveProduct(chatId, state.data);
       }
     }
@@ -488,7 +552,8 @@ class BotController {
             : [{ text: "❌ ناموجود", callback_data: "noop" }],
         ]);
 
-        if (product.image_url && product.image_url.startsWith('http')) {
+        // ارسال عکس با file_id
+        if (product.image_url) {
           await BotService.sendPhoto(chatId, product.image_url, caption, keyboard);
         } else {
           await BotService.sendMessage(chatId, caption, keyboard);
@@ -501,6 +566,8 @@ class BotController {
       throw error;
     }
   }
+
+  
 
   // ==================== Cart Management ====================
   async showCart(chatId, userId) {
@@ -910,11 +977,19 @@ class BotController {
         message += `\n📝 توضیحات:\n${Helper.truncate(product.description, 200)}\n`;
       }
 
+      // نمایش عکس با file_id
+      if (product.image_url) {
+        await BotService.sendPhoto(chatId, product.image_url, message);
+      } else {
+        message += `\n📷 عکس: ندارد`;
+        await BotService.sendMessage(chatId, message);
+      }
+
       const buttons = [
         [
           { text: "✏️ ویرایش", callback_data: `product_edit_${product.id}` },
           { 
-            text: product.is_active ? "❌ غیرفعال کردن" : "✅ فعال کردن", 
+            text: product.is_active ? "❌ غیرفعال" : "✅ فعال", 
             callback_data: `product_toggle_${product.id}` 
           },
         ],
@@ -924,11 +999,16 @@ class BotController {
             callback_data: `product_toggle_featured_${product.id}` 
           }
         ],
-        [{ text: "🗑 حذف کامل محصول", callback_data: `product_delete_${product.id}` }],
-        [{ text: "🔙 برگشت به لیست", callback_data: "back_products_list" }],
+        [{ text: "📸 تغییر عکس", callback_data: `product_change_image_${product.id}` }],
+        [{ text: "🗑 حذف محصول", callback_data: `product_delete_${product.id}` }],
+        [{ text: "🔙 برگشت", callback_data: "back_products_list" }],
       ];
 
-      return BotService.sendMessage(chatId, message, Helper.createInlineKeyboard(buttons));
+      return BotService.sendMessage(
+        chatId, 
+        "گزینه مورد نظر را انتخاب کنید:",
+        Helper.createInlineKeyboard(buttons)
+      );
     } catch (error) {
       logger.error(`خطا در showProductManagement: ${error.message}`);
       throw error;
@@ -982,20 +1062,56 @@ class BotController {
 
   async saveProduct(chatId, productData) {
     try {
-      const productId = await Product.create(productData);
-      this.clearUserState(chatId);
+      // اگر عکس آپلود شده
+      if (productData.image_file_id) {
+        await BotService.sendMessage(chatId, "⏳ در حال ذخیره محصول...");
+        
+        // ذخیره file_id مستقیماً
+        const productId = await Product.create({
+          category_id: productData.category_id,
+          name: productData.name,
+          price: productData.price,
+          stock: productData.stock,
+          description: productData.description,
+          image_url: productData.image_file_id, // ← مستقیماً file_id
+          is_featured: productData.is_featured || false
+        });
+        
+        this.clearUserState(chatId);
+        
+        return BotService.sendMessage(
+          chatId,
+          `✅ محصول با عکس اضافه شد!\n\n🆔 ${productId}\n📦 ${productData.name}`,
+          this.adminMenu()
+        );
+      } else {
+        // بدون عکس
+        const productId = await Product.create({
+          category_id: productData.category_id,
+          name: productData.name,
+          price: productData.price,
+          stock: productData.stock,
+          description: productData.description,
+          image_url: null,
+          is_featured: productData.is_featured || false
+        });
+        
+        this.clearUserState(chatId);
 
-      return BotService.sendMessage(
-        chatId,
-        `✅ محصول اضافه شد!\n\n🆔 ${productId}\n📦 ${productData.name}`,
-        this.adminMenu()
-      );
+        return BotService.sendMessage(
+          chatId,
+          `✅ محصول بدون عکس اضافه شد!\n\n🆔 ${productId}\n📦 ${productData.name}`,
+          this.adminMenu()
+        );
+      }
     } catch (error) {
       logger.error(`خطا در saveProduct: ${error.message}`);
       this.clearUserState(chatId);
-      return BotService.sendMessage(chatId, `❌ خطا: ${error.message}`);
+      return BotService.sendMessage(chatId, `❌ خطا: ${error.message}`, this.adminMenu());
     }
   }
+
+  
 
   // ==================== Admin - Category Management ====================
   async showCategoriesList(chatId) {
@@ -1415,6 +1531,38 @@ class BotController {
         await this.showProductsList(chatId, page);
         await BotService.answerCallbackQuery(callbackQuery.id, "");
         return;
+      }
+
+      // تغییر عکس محصول
+      if (callbackData.startsWith("product_change_image_")) {
+        const productId = parseInt(callbackData.split("_")[3]);
+        const product = await Product.findById(productId);
+        
+        const state = this.getUserState(chatId);
+        state.step = "edit_product_image";
+        state.data = { productId, product };
+        
+        await BotService.deleteMessage(chatId, messageId);
+        await BotService.answerCallbackQuery(callbackQuery.id, "");
+        
+        let msg = `📸 *تغییر عکس محصول*\n\n`;
+        msg += `محصول: ${product.name}\n\n`;
+        
+        if (product.image_url) {
+          const imagePath = FileManager.getProductImagePath(product.image_url);
+          if (FileManager.fileExists(imagePath)) {
+            msg += `عکس فعلی:\n`;
+            await BotService.sendPhoto(chatId, imagePath, "عکس فعلی");
+          } else {
+            msg += `⚠️ عکس فعلی یافت نشد\n\n`;
+          }
+        } else {
+          msg += `⚠️ این محصول عکس ندارد\n\n`;
+        }
+        
+        msg += `لطفاً عکس جدید را ارسال کنید:`;
+        
+        return BotService.sendMessage(chatId, msg);
       }
 
       // ==================== Category Management ====================
